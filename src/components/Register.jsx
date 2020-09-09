@@ -1,42 +1,37 @@
 import React from 'react';
 import { Form, Input, Typography, Button } from 'antd'; 
+import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+
 
 const { Title } = Typography;
 
-export default function Register() {
+export default function Register(props) {
 
-    const formItemLayout = {
-        labelCol: {
-          xs: { span: 24 },
-          sm: { span: 8 },
-        },
-        wrapperCol: {
-          xs: { span: 24 },
-          sm: { span: 16 },
-        },
-      };
-
-      const onFinish = values => {
+    const onFinish = (values) => {
         console.log('Received values of form: ', values);
-      };
+        props.history.push("/login")
+    };
 
 
     return (
         <div className="container">
-            <Form {...formItemLayout} name="form" onFinish={onFinish} >
+            <Form name="form" onFinish={onFinish} >
                 <Title level={2} > Registration Form </Title>
 
-                <Form.Item name="username" label="Username" rules={[
+                <Form.Item name="username"  rules={[
                     {
                         required: true,
                         messgae: "Please Enter a Username"
                     }
                 ]}
                 >
-                    <Input />
+                    <Input 
+                        prefix={ <UserOutlined /> }
+                        placeholder="Username" 
+                    />
                 </Form.Item>
 
-                <Form.Item name="email" label="Email"  rules={[
+                <Form.Item name="email"  rules={[
                     {
                         type: 'email',
                         message: 'The input is not valid E-mail!',
@@ -47,12 +42,14 @@ export default function Register() {
                     },
                 ]} 
                 >
-                    <Input />
+                    <Input 
+                        prefix={ <MailOutlined /> }  
+                        placeholder="Email" 
+                    />
                 </Form.Item>
 
                 <Form.Item 
                     name="password" 
-                    label="Password" 
                     rules={[
                         {
                             required: true,
@@ -60,11 +57,13 @@ export default function Register() {
                         }
                     ]} 
                 >
-                    <Input.Password />
+                    <Input.Password 
+                        prefix={ <LockOutlined /> } 
+                        placeholder="Password" 
+                    />
                 </Form.Item>
 
                 <Form.Item name="confirm" 
-                    label="Confirm Password" 
                     dependencies={['password']} 
                     rules={[
                         {
@@ -81,13 +80,16 @@ export default function Register() {
                         }),
                     ]}  
                 >
-                    <Input.Password />
+                    <Input.Password 
+                        prefix={ <LockOutlined /> }  
+                        placeholder="Comfirm Password" 
+                    />
                 </Form.Item>
 
-            
-                <Button type="primary" htmlType="submit"> Register </Button>
+                <Button type="primary" htmlType="submit" className="register-form-button" > Register </Button>
+                Already have an account? <a href="/login">Log In</a>
             
             </Form>
         </div>
-    )
+    );
 }
