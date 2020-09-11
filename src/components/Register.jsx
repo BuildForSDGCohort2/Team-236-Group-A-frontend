@@ -1,6 +1,6 @@
-import React from 'react';
-import { Form, Input, Typography, Button } from 'antd'; 
-import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import React from "react";
+import { Form, Input, Typography, Button } from "antd"; 
+import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { register } from "../Auth";
 
 
@@ -8,13 +8,12 @@ const { Title } = Typography;
 
 export default function Register(props) {
     const { history } = props;
-    console.log(history)
 
     const onFinish = (values) => {
         
         register(values, () => {
-            history.push("/login")
-        })
+            history.push("/login");
+        });
     };
 
 
@@ -38,12 +37,12 @@ export default function Register(props) {
 
                 <Form.Item name="email"  rules={[
                     {
-                        type: 'email',
-                        message: 'The input is not valid E-mail!',
+                        type: "email",
+                        message: "The input is not valid E-mail!",
                     },
                     {
                         required: true,
-                        message: 'Please input your E-mail!',
+                        message: "Please input your E-mail!",
                     },
                 ]} 
                 >
@@ -58,7 +57,7 @@ export default function Register(props) {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your password!',
+                            message: "Please input your password!",
                         }
                     ]} 
                 >
@@ -69,18 +68,18 @@ export default function Register(props) {
                 </Form.Item>
 
                 <Form.Item name="confirm" 
-                    dependencies={['password']} 
+                    dependencies={["password"]} 
                     rules={[
                         {
                             required: true,
-                            message: 'Please confirm your password!',
+                            message: "Please confirm your password!",
                         },
                         ({ getFieldValue }) => ({
                             validator(rule, value) {
-                            if (!value || getFieldValue('password') === value) {
+                            if (!value || getFieldValue("password") === value) {
                                 return Promise.resolve();
                             }
-                            return Promise.reject('The two passwords that you entered do not match!');
+                            return Promise.reject("The two passwords that you entered do not match!");
                             },
                         }),
                     ]}  
@@ -97,4 +96,4 @@ export default function Register(props) {
             </Form>
         </div>
     );
-}
+};

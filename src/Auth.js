@@ -8,18 +8,18 @@ const options = {
         "Content-Type": "application/json",
         "Origin": "https://api-agrofix.herokuapp.com"
     },  
-}
+};
 
 
 //Registration Function
 export function register(values, callback) {
-    const {username, email, password} = values;
+    const { username, email, password } = values;
 
     options.body = JSON.stringify({
         username,
         email,
         password
-    })    
+    });  
 
     fetch(BASE_URL+"/signup", options)
     .then((res) => res.json())
@@ -33,8 +33,8 @@ export function register(values, callback) {
     })
     .catch((err) => {
         console.log(err);
-    })
-}
+    });
+};
 
 
 //Login function
@@ -45,13 +45,13 @@ export function login(values, callback) {
     options.body = JSON.stringify({
         usernameOrEmail: username,
         password
-    })
+    });
 
     fetch(BASE_URL+"/login", options)
     .then((res) => res.json())
     .then((data) => {
         if(data.data && data.data.token) {
-            localStorage.setItem("token", data.data.token);
+            localStorage.setItem("token","Bearer " + data.data.token);
             callback();
 
         }else if (data && data.error) {

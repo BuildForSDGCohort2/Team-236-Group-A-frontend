@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
-import { Layout, Menu, Row, Col } from 'antd';
+import { Layout, Menu, Row, Col } from "antd";
 
 import "./App.css";
 
-import Home from './components/Home';
-import Login from './components/Login';
-import Register from './components/Register';
-import Protected from './components/Protected';
+import Home from "./components/Home";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Protected from "./components/Protected";
 
 
 const { Header } = Layout;

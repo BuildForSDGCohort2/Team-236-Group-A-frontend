@@ -1,6 +1,6 @@
 import React from "react";
-import { Form, Input, Button, Typography } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { Form, Input, Button, Typography } from "antd";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { login } from "../Auth";
 
 

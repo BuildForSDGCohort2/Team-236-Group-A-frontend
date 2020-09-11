@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
 
@@ -8,7 +8,7 @@ function Protected({Component, auth, ...rest}) {
         <Route {...rest}  render={(props) => (
            auth? <Component { ...props } /> : <Redirect to="/login" />
         )} />
-    )
-}
+    );
+};
 
-export default Protected
+export default Protected;
