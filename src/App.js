@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
 import { Layout, Menu, Row, Col } from 'antd';
 
-import './App.css';
+import "./App.css";
 
 import Home from './components/Home';
 import Login from './components/Login';
@@ -10,23 +10,21 @@ import Register from './components/Register';
 import Protected from './components/Protected';
 
 
-
 const { Header } = Layout;
-
 
 
 function App() {
 const [auth, setAuth] = useState(false);
 
 
-const login = (history) => {
-  setAuth(true)
-  history.push("/")
-}
+const isLoggedIn = (history) => {
+  setAuth(true);
+  history.push("/");
+};
 
-const logout = (history) => {
-  setAuth(false)
-}
+const isLoggedOut = (history) => {
+  setAuth(false);
+};
 
   return (
     <div className="App">
@@ -48,7 +46,7 @@ const logout = (history) => {
                   (
                     <Menu theme="dark" mode="horizontal" >
                       <Menu.Item >
-                        <Link to="" onClick={logout} >Logout</Link>
+                        <Link to="" onClick={ isLoggedOut } >Logout</Link>
                       </Menu.Item>
                     </Menu>
                   )
@@ -73,8 +71,8 @@ const logout = (history) => {
  
         <Switch>
           <Protected path='/' auth={auth}  Component={ Home } exact />
-          <Route path='/login'  render={ () => <Login login={login} /> } exact />
-          <Route path='/register'  render={(props) => <Register {...props} /> } exact />
+          <Route path='/login'  render={(props) => <Login { ...props } isloggedin={ isLoggedIn }  /> } exact />
+          <Route path='/register'  render={(props) => <Register { ...props } /> } exact />
         </Switch>
 
       </Router>

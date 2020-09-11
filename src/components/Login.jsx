@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Input, Button, Typography } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { useHistory } from "react-router-dom"
+import { login } from "../Auth";
 
 
 
@@ -9,12 +9,16 @@ import { useHistory } from "react-router-dom"
 const { Title } = Typography;
 
 function Login(props) {
-  const history = useHistory()
+  const { history, isloggedin } = props;
 
-    const onFinish = (values) => {
-      console.log('Received values of form: ', values);
-      props.login(history);
-    };
+  const onFinish = (values) => {
+
+      login(values, () => {
+        isloggedin(history);
+      });
+  };
+
+
 
   return (
     <div className="container" >

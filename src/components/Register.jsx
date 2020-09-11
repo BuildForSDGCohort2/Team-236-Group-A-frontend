@@ -1,15 +1,20 @@
 import React from 'react';
 import { Form, Input, Typography, Button } from 'antd'; 
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import { register } from "../Auth";
 
 
 const { Title } = Typography;
 
 export default function Register(props) {
+    const { history } = props;
+    console.log(history)
 
     const onFinish = (values) => {
-        console.log('Received values of form: ', values);
-        props.history.push("/login")
+        
+        register(values, () => {
+            history.push("/login")
+        })
     };
 
 
