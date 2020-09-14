@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch, Link, Redirect} from "react-router-dom";
 import { Layout, Menu, Row, Col } from "antd";
+import jwtDecode from "jwt-decode";
 
 import "./App.css";
 
@@ -14,7 +15,26 @@ const { Header } = Layout;
 
 
 function App() {
-const [auth, setAuth] = useState(true);
+const [auth, setAuth] = useState(false);
+
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  if(!token) return setAuth(false);
+
+  try{
+    const { exp } = jwtDecode(token);
+    const currentDate = Math.round(Date.now() / 1000);
+
+    if(exp < currentDate) {
+      return setAuth(false);
+    }else return setAuth(true)
+    
+  }catch(err) {
+    setAuth(false);
+  };
+
+}, [auth]);
+
 
 
 const isLoggedIn = (history) => {
@@ -22,7 +42,8 @@ const isLoggedIn = (history) => {
   history.push("/");
 };
 
-const isLoggedOut = (history) => {
+const isLoggedOut = () => {
+  localStorage.removeItem("token");
   setAuth(false);
 };
 
@@ -71,8 +92,18 @@ const isLoggedOut = (history) => {
  
         <Switch>
           <Protected path='/' auth={auth}  Component={ Home } exact />
-          <Route path='/login'  render={(props) => <Login { ...props } isloggedin={ isLoggedIn }  /> } exact />
-          <Route path='/register'  render={(props) => <Register { ...props } isloggedin={ isLoggedIn } /> } exact />
+          <Route 
+            path='/login'  
+            render={ (props) => auth? <Redirect to="/" /> : <Login { ...props } isloggedin={ isLoggedIn }/> } 
+            exact 
+          />
+          
+          <Route 
+            path='/register'  
+            render={ (props) => auth? <Redirect to="/" /> : <Register { ...props } isloggedin={ isLoggedIn }/> } 
+            exact 
+          />
+
         </Switch>
 
       </Router>

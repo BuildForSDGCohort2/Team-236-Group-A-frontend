@@ -10,12 +10,12 @@ const { Title } = Typography;
 
 function Login(props) {
   const { history, isloggedin } = props;
-  const [loading, setloading] = useState(false)
+  const [loading, setloading] = useState(false);
 
   const onFinish = (values) => {
-      setloading(true)
+      setloading(true);
       login(values, () => {
-        setloading(false)
+        setloading(false);
         isloggedin(history);
       });
   };

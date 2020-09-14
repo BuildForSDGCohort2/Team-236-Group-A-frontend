@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
-import {  Button, Empty } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import {  Button, Empty } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
 
 
 
@@ -14,7 +14,7 @@ function Home() {
  
   const preview = (e) => {
     const file = e.target.files[0];
-    const reader = new FileReader()
+    const reader = new FileReader();
 
     reader.addEventListener("load", (e) => {
       const { result } = e.target;
@@ -22,11 +22,11 @@ function Home() {
         ...image,
         file: result,
         name: file.name
-      })
+      });
     });
 
     reader.readAsDataURL(file);
-  }
+  };
  
   
   return ( 

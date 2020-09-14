@@ -11,9 +11,9 @@ export default function Register(props) {
     const [loading, setLoading] = useState(false);
 
     const onFinish = (values) => {
-        setLoading(true)
+        setLoading(true);
         register(values, () => {
-            setLoading(false)
+            setLoading(false);
             isLoggedIn(history);
         });
     };

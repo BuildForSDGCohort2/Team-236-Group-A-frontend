@@ -55,10 +55,10 @@ export function login(values, callback) {
             callback();
 
         }else if (data && data.error) {
-            console.log(data.error.message)
-        }
+            console.log(data.error.message);
+        };
     })
     .catch((err) => {
-        console.log(err)
+        console.log(err);
     });
 }
