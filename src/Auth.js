@@ -56,7 +56,7 @@ export function login(values, callback) {
 
         }else if (data && data.error) {
             console.log(data.error.message);
-        };
+        }
     })
     .catch((err) => {
         console.log(err);

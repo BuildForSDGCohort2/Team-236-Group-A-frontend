@@ -19,7 +19,9 @@ const [auth, setAuth] = useState(false);
 
 useEffect(() => {
   const token = localStorage.getItem("token");
-  if(!token) return setAuth(false);
+  if(!token) {
+    return setAuth(false);
+  };
 
   try{
     const { exp } = jwtDecode(token);
@@ -27,11 +29,13 @@ useEffect(() => {
 
     if(exp < currentDate) {
       return setAuth(false);
-    }else return setAuth(true)
+    }else {
+      return setAuth(true);
+    }
     
   }catch(err) {
     setAuth(false);
-  };
+  }
 
 }, [auth]);
 
