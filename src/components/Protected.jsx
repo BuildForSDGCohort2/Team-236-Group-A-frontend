@@ -9,6 +9,6 @@ function Protected({Component, auth, ...rest}) {
            auth? <Component { ...props } /> : <Redirect to="/login" />
         )} />
     );
-};
+}
 
 export default Protected;

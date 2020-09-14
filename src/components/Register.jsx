@@ -1,5 +1,5 @@
-import React from "react";
-import { Form, Input, Typography, Button } from "antd"; 
+import React, { useState } from "react";
+import { Form, Input, Typography, Button, Spin } from "antd"; 
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { register } from "../Auth";
 
@@ -7,12 +7,14 @@ import { register } from "../Auth";
 const { Title } = Typography;
 
 export default function Register(props) {
-    const { history } = props;
+    const { history, isLoggedIn } = props;
+    const [loading, setLoading] = useState(false);
 
     const onFinish = (values) => {
-        
+        setLoading(true)
         register(values, () => {
-            history.push("/login");
+            setLoading(false)
+            isLoggedIn(history);
         });
     };
 
@@ -89,11 +91,12 @@ export default function Register(props) {
                         placeholder="Comfirm Password" 
                     />
                 </Form.Item>
-
-                <Button type="primary" htmlType="submit" className="register-form-button" > Register </Button>
+                <Spin spinning={loading}>    
+                    <Button type="primary" htmlType="submit" className="register-form-button" > Register </Button>
+                </Spin>
                 Already have an account? <a href="/login">Log In</a>
             
             </Form>
         </div>
     );
-};
+}

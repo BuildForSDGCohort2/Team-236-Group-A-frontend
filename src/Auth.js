@@ -6,7 +6,6 @@ const options = {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
-        "Origin": "https://api-agrofix.herokuapp.com"
     },  
 };
 
@@ -25,6 +24,7 @@ export function register(values, callback) {
     .then((res) => res.json())
     .then((data) => {
         if(data.data && data.data.token) {
+            localStorage.setItem("token","Bearer " + data.data.token);
             callback();
 
         }else if (data && data.error) {
@@ -34,7 +34,7 @@ export function register(values, callback) {
     .catch((err) => {
         console.log(err);
     });
-};
+}
 
 
 //Login function
@@ -60,5 +60,5 @@ export function login(values, callback) {
     })
     .catch((err) => {
         console.log(err)
-    })
+    });
 }

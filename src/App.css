@@ -33,5 +33,26 @@
   margin: 5rem auto 0;
 }
 
+/* Image Box */
+.img-container {
+  border: 1px solid rgb(85, 85, 85);
+  border-radius: .3rem;
+  background: rgb(240, 240, 240);
+  max-width: 600px;
+  height: 400px;
+  margin: .5rem auto .5rem;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-container img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+}
+
 
 

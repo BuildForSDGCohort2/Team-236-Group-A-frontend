@@ -14,7 +14,7 @@ const { Header } = Layout;
 
 
 function App() {
-const [auth, setAuth] = useState(false);
+const [auth, setAuth] = useState(true);
 
 
 const isLoggedIn = (history) => {
@@ -32,14 +32,14 @@ const isLoggedOut = (history) => {
 
         <Layout>
           <Header>
-            <Row justify="space-between" >
-              <Col sm={4} xs={10}>
+            <Row >
+              <Col flex={1}>
                 <Link to="/">
                   <h2 className="logo">Agro Fix</h2>
                 </Link> 
               </Col>
 
-              <Col sm={4} xs={10}>
+              <Col >
                 
                 {
                   auth?
@@ -72,7 +72,7 @@ const isLoggedOut = (history) => {
         <Switch>
           <Protected path='/' auth={auth}  Component={ Home } exact />
           <Route path='/login'  render={(props) => <Login { ...props } isloggedin={ isLoggedIn }  /> } exact />
-          <Route path='/register'  render={(props) => <Register { ...props } /> } exact />
+          <Route path='/register'  render={(props) => <Register { ...props } isloggedin={ isLoggedIn } /> } exact />
         </Switch>
 
       </Router>

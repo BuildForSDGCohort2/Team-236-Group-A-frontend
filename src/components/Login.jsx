@@ -1,5 +1,5 @@
-import React from "react";
-import { Form, Input, Button, Typography } from "antd";
+import React, { useState } from "react";
+import { Form, Input, Button, Typography, Spin } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { login } from "../Auth";
 
@@ -10,10 +10,12 @@ const { Title } = Typography;
 
 function Login(props) {
   const { history, isloggedin } = props;
+  const [loading, setloading] = useState(false)
 
   const onFinish = (values) => {
-
+      setloading(true)
       login(values, () => {
+        setloading(false)
         isloggedin(history);
       });
   };
@@ -64,13 +66,15 @@ function Login(props) {
         </Form.Item>
        
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
-          >
-            Log in
-          </Button>
+          <Spin spinning={loading}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+            >
+              Log in
+            </Button>
+          </Spin>
           Or <a href="/register">register now!</a>
         </Form.Item>
       </Form>
