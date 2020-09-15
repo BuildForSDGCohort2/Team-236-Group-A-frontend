@@ -9,12 +9,18 @@ function Home() {
     file: null,
     name: ""
   });
+  const [notify, setNotify] = useState("")
 
   const input = useRef();
  
   const preview = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
+
+    if( file.type.indexOf("image") === -1 ) {
+      setNotify("Only Images Are Allowed");
+      return;
+    }
 
     reader.addEventListener("load", (e) => {
       const { result } = e.target;
