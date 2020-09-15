@@ -21,7 +21,7 @@ useEffect(() => {
   //Authenticating token
   const token = localStorage.getItem("token");
   if(!token) {
-    return setAuth(false)
+    return setAuth(false);
   }
 
   //Decodeing token to get expiration date
