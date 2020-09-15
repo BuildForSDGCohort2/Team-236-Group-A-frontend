@@ -14,11 +14,7 @@ function Home() {
     file: GrapeDisease,
     name: "Grape Disease"
   });
-<<<<<<< HEAD
-  const [notify, setNotify] = useState("")
-=======
   const [predictions, setPredictions] = useState([]);
->>>>>>> 1856daa22732b848ff2f961bcbeb0ddfa57eb227
 
   const input = useRef();
 
@@ -46,22 +42,6 @@ function Home() {
   useEffect(classifyImg, []);
  
   const preview = (e) => {
-<<<<<<< HEAD
-    const file = e.target.files[0];
-    const reader = new FileReader();
-
-    if( file.type.indexOf("image") === -1 ) {
-      setNotify("Only Images Are Allowed");
-      return;
-    }
-
-    reader.addEventListener("load", (e) => {
-      const { result } = e.target;
-      setImage({
-        ...image,
-        file: result,
-        name: file.name
-=======
     if (e.target.files.length) {
       const file = e.target.files[0];
       const reader = new FileReader();
@@ -74,7 +54,6 @@ function Home() {
           name: file.name
         });
         classifyImg();
->>>>>>> 1856daa22732b848ff2f961bcbeb0ddfa57eb227
       });
 
       reader.readAsDataURL(file);

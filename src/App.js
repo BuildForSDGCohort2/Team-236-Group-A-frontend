@@ -22,7 +22,7 @@ useEffect(() => {
   const token = localStorage.getItem("token");
   if(!token) {
     return setAuth(false)
-  };
+  }
 
   //Decodeing token to get expiration date
   try{

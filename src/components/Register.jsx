@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Typography, Button, Spin } from "antd"; 
+import { Form, Input, Typography, Button, Spin, Alert } from "antd"; 
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { register } from "../Auth";
 
@@ -9,12 +9,22 @@ const { Title } = Typography;
 export default function Register(props) {
     const { history, isLoggedIn } = props;
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const onFinish = (values) => {
         setLoading(true);
-        register(values, () => {
-            setLoading(false);
-            isLoggedIn(history);
+        register(values, (err) => {
+            if(err) {
+                setError(err);
+                //set timeout to delete error message
+                setTimeout(() => setError(null), 10000);
+
+                setLoading(false);  
+            } else {
+                setLoading(false);
+                isLoggedIn(history);
+            }
+            
         });
     };
 
@@ -23,7 +33,8 @@ export default function Register(props) {
         <div className="container">
             <Form name="form" onFinish={onFinish} >
                 <Title level={2} > Registration Form </Title>
-
+                { error? <Alert message={error} type="error" showIcon /> : null }<br/>
+                
                 <Form.Item name="username"  rules={[
                     {
                         required: true,
