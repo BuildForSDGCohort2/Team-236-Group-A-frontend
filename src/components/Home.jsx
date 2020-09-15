@@ -1,19 +1,52 @@
-import React, { useState, useRef } from "react";
-import {  Button, Empty } from "antd";
+import React, { useState, useRef, useEffect, Fragment } from "react";
+import {  Button, Empty, Col, Row, Table } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import * as ml5 from "ml5";
+import GrapeDisease from '../assets/img/grape-disease.jpg';
 
-
+const columns = [
+  { title: 'Label', dataIndex: 'label', key: 'label' },
+  { title: 'Confidence', dataIndex: 'confidence', key: 'confidence' }
+];
 
 function Home() {
   const [image, setImage] = useState({
-    file: null,
-    name: ""
+    file: GrapeDisease,
+    name: "Grape Disease"
   });
+<<<<<<< HEAD
   const [notify, setNotify] = useState("")
+=======
+  const [predictions, setPredictions] = useState([]);
+>>>>>>> 1856daa22732b848ff2f961bcbeb0ddfa57eb227
 
   const input = useRef();
+
+  const classifyImg = () => {
+    // Initialize the Image Classifier method with MobileNet
+    const classifier = ml5.imageClassifier('MobileNet', modelLoaded);
+    // When the model is loaded
+    function modelLoaded() {
+      console.log('Model Loaded!');
+    }
+    // Put the image to classify inside a variable
+    const image = document.getElementById('image');
+    // Make a prediction with a selected image
+    classifier.predict(image, 5, function(err, results) {
+      if (err) {
+        setPredictions([{ error: true, message: err.message }]);
+      } else {
+        // Set Result to State
+        console.log(results);
+        setPredictions(results.map((each, i) => ({ ...each, key: i })));
+      }
+    });
+  }
+
+  useEffect(classifyImg, []);
  
   const preview = (e) => {
+<<<<<<< HEAD
     const file = e.target.files[0];
     const reader = new FileReader();
 
@@ -28,40 +61,61 @@ function Home() {
         ...image,
         file: result,
         name: file.name
+=======
+    if (e.target.files.length) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+
+      reader.addEventListener("load", (e) => {
+        const { result } = e.target;
+        setImage({
+          ...image,
+          file: result,
+          name: file.name
+        });
+        classifyImg();
+>>>>>>> 1856daa22732b848ff2f961bcbeb0ddfa57eb227
       });
-    });
 
-    reader.readAsDataURL(file);
-  };
- 
+      reader.readAsDataURL(file);
+    }
+  }; 
   
-  return ( 
-      <div>
-        <h1>Welcome to Home Page</h1>
+  return (
+    <Fragment>
+      <h1>Plant Disease Dectection</h1>
+      <Row>
+        <Col span={12}>
+          <input
+            type="file"
+            id="file-input"
+            hidden="hidden"
+            ref={input}
+            onChange={preview}
+          />
 
-        <input 
-          type="file" 
-          id="file-input" 
-          hidden="hidden" 
-          ref={input} 
-          onChange={preview}
-        />
-        
-        <Button 
-          type="primary" 
-          icon={<UploadOutlined />} 
-          onClick={() => input.current.click()} 
-        >
-          Select Image
+          <div className="img-container">
+            {image.file ? <img src={image.file} id="image" alt={image.name} /> : <Empty description={"No Image"} />}
+          </div>
+
+          <Button
+            type="primary"
+            icon={<UploadOutlined />}
+            onClick={() => input.current.click()}
+          >
+            Select Image
         </Button>
-        
-
-        <div className="img-container">
-          {image.file? <img src={image.file} alt={image.name}/> : <Empty description={"No Image"} /> }
-        </div>
-
-        <Button type="primary" style={{margin: "0 0 .5rem "}}>Upload Image</Button>
-      </div>
+        </Col>
+        <Col span={12}>
+          <Table
+            dataSource={predictions}
+            columns={columns}
+            bordered={true}
+            pagination={false}
+          />;
+        </Col>
+      </Row>
+    </Fragment>
   );
 }
 

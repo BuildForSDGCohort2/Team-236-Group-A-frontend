@@ -28,11 +28,11 @@ export function register(values, callback) {
             callback();
 
         }else if (data && data.error) {
-            console.log(data.error.message);
+            callback(data.error.message);
         }
     })
     .catch((err) => {
-        console.log(err);
+        callback("Registration Failed");
     });
 }
 
@@ -55,10 +55,10 @@ export function login(values, callback) {
             callback();
 
         }else if (data && data.error) {
-            console.log(data.error.message);
+            callback(data.error.message);
         }
     })
     .catch((err) => {
-        console.log(err);
+        callback("Login Failed");
     });
 }
