@@ -18,11 +18,13 @@ function App() {
 const [auth, setAuth] = useState(false);
 
 useEffect(() => {
+  //Authenticating token
   const token = localStorage.getItem("token");
   if(!token) {
     return setAuth(false);
-  };
+  }
 
+  //Decodeing token to get expiration date
   try{
     const { exp } = jwtDecode(token);
     const currentDate = Math.round(Date.now() / 1000);
