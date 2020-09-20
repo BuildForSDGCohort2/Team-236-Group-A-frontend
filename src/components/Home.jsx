@@ -63,8 +63,8 @@ function Home() {
   return (
     <Fragment>
       <h1>Plant Disease Dectection</h1>
-      <Row>
-        <Col span={12}>
+      <Row >
+        <Col xs={24} sm={24} md={24} lg={12} className="mb" >
           <input
             type="file"
             id="file-input"
@@ -85,13 +85,14 @@ function Home() {
             Select Image
         </Button>
         </Col>
-        <Col span={12}>
+        <Col xs={24} sm={24}  md={24} lg={12}>
           <Table
+            className="table"
             dataSource={predictions}
             columns={columns}
             bordered={true}
             pagination={false}
-          />;
+          />
         </Col>
       </Row>
     </Fragment>
