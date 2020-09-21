@@ -59,6 +59,6 @@ export function login(values, callback) {
         }
     })
     .catch((err) => {
-        callback("Login Failed");
+        callback("Login Failed. Try Again");
     });
 }

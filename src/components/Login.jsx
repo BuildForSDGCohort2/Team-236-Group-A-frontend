@@ -41,7 +41,7 @@ function Login(props) {
         onFinish={onFinish}
       >
         <Title level={2} > Login Form </Title>
-        { error? <Alert message={error} type="error" showIcon /> : null }<br />
+        { error? <Alert message={error} type="error" /> : null }<br />
         
         <Form.Item
           name="username"
