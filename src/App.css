@@ -14,13 +14,13 @@
   color: #fff;
 }
 
-.logo, .admin {
+.logo,.admin {
   width: 100px;
   color: #fff;
   display: inline-block;
 }
 
-.logo:hover, .admin:hover {
+.logo:hover,.admin:hover {
   color: rgb(206, 206, 206);
 }
 
@@ -32,7 +32,6 @@
 .side-bar {
   color: #fff;
 }
-
 
 /*  FORM */
 .login-form-button {
@@ -71,6 +70,7 @@
 .mb {
   margin-bottom: 1rem;
 }
+
 
 .table {
   margin: 0 1rem 0.5rem;

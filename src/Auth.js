@@ -25,6 +25,7 @@ export function register(values, callback) {
     .then((data) => {
         if(data.data && data.data.token) {
             localStorage.setItem("token","Bearer " + data.data.token);
+            localStorage.setItem("role", data.data.role);
             callback();
 
         }else if (data && data.error) {
@@ -52,6 +53,7 @@ export function login(values, callback) {
     .then((data) => {
         if(data.data && data.data.token) {
             localStorage.setItem("token","Bearer " + data.data.token);
+            localStorage.setItem("role", data.data.role);
             callback();
 
         }else if (data && data.error) {

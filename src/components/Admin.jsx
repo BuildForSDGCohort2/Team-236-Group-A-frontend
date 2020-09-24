@@ -1,29 +1,30 @@
 import React, { useState } from "react";
 import { Layout, Menu } from "antd";
 import { UserOutlined, DashboardOutlined } from "@ant-design/icons";
-
+import AdminPanel from "./AdminPanel";
 
 const { Content , Sider } = Layout;
 
 
 function Admin() {
-    const [head, setHead] = useState("Admin Dashboard");
     const [selected, setSelected] = useState("Dashboard");
     const [width, setWidth] = useState(200);
 
     const handleClick = (e) => {
-        setHead(e.key);
         setSelected(e.key); 
     };
+
+    const handleCollapse = () => {
+        width === 200 ? setWidth(80) : setWidth(200);
+    }
 
     return (
         <div>
             <Layout style={{ minHeight: "100vh", position: "relative" }}>
                 <Sider 
                     className="side-bar"
-                    trigger={null}
                     collapsible
-                    onCollapse={() => setWidth(80)}
+                    onCollapse={ handleCollapse }
                     breakpoint="md"
                     collapsedWidth="80px"
                     style={{
@@ -51,12 +52,12 @@ function Admin() {
                 </Sider>
                 <Content
                     style={{marginLeft: width, paddingTop: 80}}
-                >
-                    <h1>{ head }</h1>
+                > 
+                  <AdminPanel selected={selected} />
                 </Content>
             </Layout>
         </div>
     );
 }
 
-export default Admin
+export default Admin;

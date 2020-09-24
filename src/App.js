@@ -17,7 +17,7 @@ const { Header } = Layout;
 
 function App() {
 const [auth, setAuth] = useState(false);
-const [admin, setAdmin] = useState(true);
+const [admin, setAdmin] = useState(false);
 
 useEffect(() => {
   //Authenticating token
@@ -44,6 +44,18 @@ useEffect(() => {
 }, [auth]);
 
 
+useEffect(() => {
+  //Admin check
+  const role = localStorage.getItem("role");
+  if(role && role === "ADMIN") {
+    return setAdmin(true);
+  } else {
+    return setAdmin(false);
+  }
+
+}, [admin])
+
+
 
 const isLoggedIn = (history) => {
   setAuth(true);
@@ -52,7 +64,9 @@ const isLoggedIn = (history) => {
 
 const isLoggedOut = () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("role");
   setAuth(false);
+  setAdmin(false);
 };
 
   return (
