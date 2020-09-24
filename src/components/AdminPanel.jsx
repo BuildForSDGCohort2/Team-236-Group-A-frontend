@@ -7,11 +7,11 @@ function AdminPanel({selected}) {
   
     switch (selected) {
         case "Dashboard":
-           return <Dashboard />
+           return <Dashboard />;
         case "Users":
-            return <Users />   
+            return <Users />;  
         default:
-            return <Dashboard />
+            return <Dashboard />;
     }
 }
 

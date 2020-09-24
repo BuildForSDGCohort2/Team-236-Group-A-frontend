@@ -53,7 +53,7 @@ useEffect(() => {
     return setAdmin(false);
   }
 
-}, [admin])
+}, [admin]);
 
 
 

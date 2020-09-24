@@ -40,7 +40,7 @@ function Users() {
                 setLoad(false);
 
                 //Update localStorage
-                localStorage.setItem("role", value)
+                localStorage.setItem("role", value);
 
                 setMsg({
                     message: "Role Updated",
@@ -57,8 +57,8 @@ function Users() {
         })
         .catch((err) => {
             setLoad(false);
-            setMsg({ message: err.message, type: "error" })
-        })
+            setMsg({ message: err.message, type: "error" });
+        });
     };
 
     //On Alert Component Close
@@ -69,21 +69,21 @@ function Users() {
     //Table Column Headers
     const columns  = [
         {
-            title: 'Username',
-            dataIndex: 'username',
-            key: 'username',
+            title: "Username",
+            dataIndex: "username",
+            key: "username",
         },
         {
-            title: 'Email',
-            dataIndex: 'email',
-            width: '50%',
-            key: 'email',
+            title: "Email",
+            dataIndex: "email",
+            width: "50%",
+            key: "email",
         },
         {
-            title: 'Role',
-            dataIndex: 'role',
-            width: '20%',
-            key: 'role',
+            title: "Role",
+            dataIndex: "role",
+            width: "20%",
+            key: "role",
             render: (text, record) => (
                 <select name="role" defaultValue={ text } id={record.id} onChange={handleChange}   >
                     {
@@ -152,7 +152,7 @@ function Users() {
                 </Spin>
             </div>
         </div>
-    )
+    );
 }
 
 export default Users;

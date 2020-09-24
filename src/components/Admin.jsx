@@ -16,7 +16,7 @@ function Admin() {
 
     const handleCollapse = () => {
         width === 200 ? setWidth(80) : setWidth(200);
-    }
+    };
 
     return (
         <div>
