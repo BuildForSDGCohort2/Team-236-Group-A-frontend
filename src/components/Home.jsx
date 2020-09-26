@@ -20,7 +20,7 @@ function Home() {
 
   const classifyImg = () => {
     // Initialize the Image Classifier method with MobileNet
-    const classifier = ml5.imageClassifier('MobileNet', modelLoaded);
+    const classifier = ml5.imageClassifier(`http://teachablemachine.withgoogle.com/models/kNMJ4oaXV/model.json`, modelLoaded);
     // When the model is loaded
     function modelLoaded() {
       console.log('Model Loaded!');
