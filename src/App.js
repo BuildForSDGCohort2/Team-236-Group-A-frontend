@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Protected from "./components/Protected";
+import Admin from "./components/Admin";
 
 
 const { Header } = Layout;
@@ -16,6 +17,7 @@ const { Header } = Layout;
 
 function App() {
 const [auth, setAuth] = useState(false);
+const [admin, setAdmin] = useState(false);
 
 useEffect(() => {
   //Authenticating token
@@ -42,6 +44,18 @@ useEffect(() => {
 }, [auth]);
 
 
+useEffect(() => {
+  //Admin check
+  const role = localStorage.getItem("role");
+  if(role && role === "ADMIN") {
+    return setAdmin(true);
+  } else {
+    return setAdmin(false);
+  }
+
+}, [admin]);
+
+
 
 const isLoggedIn = (history) => {
   setAuth(true);
@@ -50,7 +64,9 @@ const isLoggedIn = (history) => {
 
 const isLoggedOut = () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("role");
   setAuth(false);
+  setAdmin(false);
 };
 
   return (
@@ -58,12 +74,22 @@ const isLoggedOut = () => {
       <Router>
 
         <Layout>
-          <Header>
-            <Row >
-              <Col flex={1}>
+          <Header style={{ zIndex: 1, position: "fixed",top: 0, width: "100vw" }} >
+            <Row justify="space-between">
+              <Col className="nav" >
                 <Link to="/">
                   <h2 className="logo">Agro Fix</h2>
                 </Link> 
+                {
+                  admin? 
+                  (
+                    <Link to="/admin">
+                      <h4 className="admin">Admin</h4>
+                    </Link> 
+                  )
+                  :
+                  null 
+                }
               </Col>
 
               <Col >
@@ -98,6 +124,7 @@ const isLoggedOut = () => {
  
         <Switch>
           <Protected path='/' auth={auth}  Component={ Home } exact />
+          <Protected path='/admin' auth={admin}  Component={ Admin } exact />
           <Route 
             path='/login'  
             render={ (props) => auth? <Redirect to="/" /> : <Login { ...props } isloggedin={ isLoggedIn }/> } 
@@ -109,7 +136,6 @@ const isLoggedOut = () => {
             render={ (props) => auth? <Redirect to="/" /> : <Register { ...props } isloggedin={ isLoggedIn }/> } 
             exact 
           />
-
         </Switch>
 
       </Router>

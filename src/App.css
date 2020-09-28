@@ -14,8 +14,22 @@
   color: #fff;
 }
 
-.logo {
+.logo,.admin {
   width: 100px;
+  color: #fff;
+  display: inline-block;
+}
+
+.logo:hover,.admin:hover {
+  color: rgb(206, 206, 206);
+}
+
+.nav {
+  text-align: left;
+}
+
+/* Admin Page */
+.side-bar {
   color: #fff;
 }
 
