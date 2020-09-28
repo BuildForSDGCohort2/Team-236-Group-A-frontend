@@ -20,7 +20,7 @@ function Home() {
 
   const classifyImg = () => {
     // Initialize the Image Classifier method with MobileNet
-    const classifier = ml5.imageClassifier(`http://teachablemachine.withgoogle.com/models/kNMJ4oaXV/model.json`, modelLoaded);
+    const classifier = ml5.imageClassifier(`https://storage.googleapis.com/tm-model/kNMJ4oaXV/model.json`, modelLoaded);
     // When the model is loaded
     function modelLoaded() {
       console.log('Model Loaded!');
@@ -62,7 +62,7 @@ function Home() {
   
   return (
     <Fragment >
-      <h1 style={{paddingTop: 60}}>Plant Disease Dectection</h1>
+      <h1 style={{paddingTop: 60}}>Plant Disease Detection</h1>
       <Row >
         <Col xs={24} sm={24} md={24} lg={12} className="mb" >
           <input
