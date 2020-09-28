@@ -62,7 +62,7 @@ function Home() {
   
   return (
     <Fragment>
-      <h1>Plant Disease Dectection</h1>
+      <h1>Plant Disease Detection</h1>
       <Row >
         <Col xs={24} sm={24} md={24} lg={12} className="mb" >
           <input
